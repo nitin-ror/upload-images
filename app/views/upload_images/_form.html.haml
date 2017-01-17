@@ -1,0 +1,65 @@
+#wrapper
+  #page-wrapper
+    .container-fluid
+      / Page Heading
+      .row
+        .col-lg-12
+          %h1.page-header
+            Upload New images
+          %ol.breadcrumb
+            %li
+              %i.fa.fa-dashboard
+              %a{:href => "/upload_images"} Index
+            %li.active
+              %i.fa.fa-edit
+              Forms
+      / /.row
+      .row
+        .col-lg-6
+          = form_for @image , :html => {:multipart => true} do |f|
+            .form-group
+              %label File input
+              = f.file_field :image, :multiple => true
+              %br
+              = f.submit "Upload", class: "btn.btn-primary"
+              / %button.btn.btn-primary{:type => "submit"} Disabled Button
+          / %h1 Form Validation
+          / %form{:role => "form"}
+          /   .form-group.has-success
+          /     %label.control-label{:for => "inputSuccess"} Input with success
+          /     %input#inputSuccess.form-control{:type => "text"}/
+          /   .form-group.has-warning
+          /     %label.control-label{:for => "inputWarning"} Input with warning
+          /     %input#inputWarning.form-control{:type => "text"}/
+          /   .form-group.has-error
+          /     %label.control-label{:for => "inputError"} Input with error
+          /     %input#inputError.form-control{:type => "text"}/
+          / %h1 Input Groups
+          / %form{:role => "form"}
+          /   .form-group.input-group
+          /     %span.input-group-addon @
+          /     %input.form-control{:placeholder => "Username", :type => "text"}/
+          /   .form-group.input-group
+          /     %input.form-control{:type => "text"}/
+          /     %span.input-group-addon .00
+          /   .form-group.input-group
+          /     %span.input-group-addon
+          /       %i.fa.fa-eur
+          /     %input.form-control{:placeholder => "Font Awesome Icon", :type => "text"}/
+          /   .form-group.input-group
+          /     %span.input-group-addon $
+          /     %input.form-control{:type => "text"}/
+          /     %span.input-group-addon .00
+          /   .form-group.input-group
+          /     %input.form-control{:type => "text"}/
+          /     %span.input-group-btn
+          /       %button.btn.btn-default{:type => "button"}
+          /         %i.fa.fa-search
+          / %p
+          /   For complete documentation, please visit
+          /   = succeed "." do
+          /     %a{:href => "http://getbootstrap.com/css/#forms"} Bootstrap's Form Documentation
+      / /.row
+    / /.container-fluid
+  / /#page-wrapper
+/ /#wrapper

@@ -1,0 +1,31 @@
+#wrapper
+  / Navigation
+  #page-wrapper
+    .container-fluid
+      / Page Heading
+      .row
+        .col-lg-12
+          %h1.page-header
+            Index
+            %small Image Overview
+          %ol.breadcrumb
+            %li.active
+              %i.fa.fa-dashboard
+              Index
+      / /.row
+      .row
+        .col-lg-12
+          .alert.alert-info.alert-dismissable
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+            %i.fa.fa-info-circle
+            %strong 
+            Try out
+            %a.alert-link{:href => "/upload_images/new"} Upload New Image
+      / /.row
+      .row
+        - @images.each do |image|
+          .col-lg-3.col-md-6
+            = image_tag (image.image.url(:small))
+      / /.row
+      / /.row
+

@@ -1,0 +1,9 @@
+.form-group.edit-image-fields.col-lg-12.tm5{:id => "temp_image_#{@temp_image.id}_div"}
+  =image_tag(@temp_image.avatar.url,class: 'img-thumbnail')
+  .input-group
+    =hidden_field_tag 'upload_images[image_id][]',@temp_image.id
+    =text_field_tag 'upload_images[description][]',nil, class: 'form-control well-inline-txt-input',:placeholder => 'Caption or Description'
+  .edit-image-delete-order
+    %button.delete_div.btn.btn-default.btn-sm{:type => 'button','data-id'=> "#temp_image_#{@temp_image.id}_div"}
+      %span.delete_div.glyphicon.glyphicon-remove.btn_del_temp_image{'aria-hidden' => 'true'}
+      Delete

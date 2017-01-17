@@ -1,0 +1,7 @@
+.hideDivimage
+	.row
+		.image-field
+			= f.hidden_field :_destroy
+			= f.link_to "X", "javascript:void(0);", :onclick => "remove_fields(this)"
+			= f.file_field :image
+

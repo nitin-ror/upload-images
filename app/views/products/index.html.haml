@@ -1,0 +1,13 @@
+%table
+	%tr
+		%th
+			Product
+		%th
+			Images
+	- @products.each do |product|
+		%tr
+			%td
+				= product.name
+			- product.upload_images.each do |image|
+				%td
+					= image_tag image.image.url

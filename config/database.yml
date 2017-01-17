@@ -47,8 +47,9 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: ckeditor_production
-  username: ckeditor
-  password: <%= ENV['CKEDITOR_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: ckeditor_production
+#   username: ckeditor
+#   password: <%= ENV['CKEDITOR_DATABASE_PASSWORD'] %>
+

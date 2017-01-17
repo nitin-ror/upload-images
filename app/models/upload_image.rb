@@ -8,4 +8,14 @@ class UploadImage < ActiveRecord::Base
 	validates_attachment_presence :image
 	validates_attachment_size :image, :less_than => 2.megabytes
 	validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
+	validates_presence_of :image,  :message => "Please enter Image"
+	validate :image_validation#, :if => "image?"  
+	# before_validation :check_image
+  def image_validation
+    errors.add(:image, "size can't less than 5 MB") if self.image.size < 5000
+  end
+  def self.check_image(product)
+  	binding.pry
+  	errors.add(:image, "size can't less than 5 MB")
+  end
 end

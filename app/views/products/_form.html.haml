@@ -22,26 +22,7 @@
               = f.text_field :name, :class => "form-control"#, :multiple => true
               %label Image
               = f.fields_for :upload_images, :html => {:multipart => true}  do |builder|
-                = builder.file_field :image, :multiple => true
+                = builder.file_field :image, :multiple => true, :required => true
                 %br
               = f.submit "Upload", class: "btn.btn-primary"
 
-:javascript
-  $( document ).on( 'click', '.image-field-remove', function(e){ 
-    $(this).closest('.image-field').remove();
-  });
-
-  var field_count = 1;
-  $(".image-class").on("click", function(){
-
-  });
-  function imageFieldFunction(){
-    field_count += 1;
-    var str = '<div class="row"><div class="image-field">';
-    str += '<input value="false" name="product[upload_images_attributes]['+field_count+'][_destroy]"id="pro    duct_upload_images_attributes_'+field_count+'__destroy" type="hidden">';
-    str += '<input name="product[upload_images_attributes]['+field_count+'][image]"id="product_upload_images_attributes_'+field_count+'_image" type="file">';
-    str += '<a class="image-field-remove" href="javascript:void(0);">X</a>';
-    str += '</div></div>';
-    $('.hideDivimage').append(str);
-    return str;
-  }

@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 			end
 			redirect_to products_path
 		else
+			@product.upload_images.build
 			render 'new'
 		end
 	end

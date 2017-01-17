@@ -1,13 +1,54 @@
-%table
-	%tr
-		%th
-			Product
-		%th
-			Images
-	- @products.each do |product|
-		%tr
-			%td
-				= product.name
-			- product.upload_images.each do |image|
-				%td
-					= image_tag image.image.url
+#wrapper
+  / Navigation
+  #page-wrapper
+    .container-fluid
+      / Page Heading
+      .row
+        .col-lg-12
+          %h1.page-header
+            Product Listing
+            %small Image Overview
+          %ol.breadcrumb
+            %li.active
+              %i.fa.fa-dashboard
+              Index
+      / /.row
+      .row
+        .col-lg-12
+          .alert.alert-info.alert-dismissable
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+            %i.fa.fa-info-circle
+            %strong 
+            Try out
+            %a.alert-link{:href => "/products/new"} Upload New Image
+      .row
+        .col-lg-6
+          %strong 
+            Name
+        .col-lg-6
+          %strong 
+            Images
+      / /.row
+      - @products.each do |product|
+        %br
+        .row
+          .col-lg-3.col-md-6
+            = product.name
+          - product.upload_images.each do |image|  
+            .col-lg-3.col-md-6
+              = image_tag image.image.url(:small)
+- if false
+
+  %table
+    %tr
+      %th
+        Product
+      %th
+        Images
+    - @products.each do |product|
+      %tr
+        %td
+          = product.name
+        - product.upload_images.each do |image|
+          %td
+            = image_tag image.image.url

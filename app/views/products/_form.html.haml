@@ -22,9 +22,7 @@
               = f.text_field :name, :class => "form-control"#, :multiple => true
               %label Image
               = f.fields_for :upload_images, :html => {:multipart => true}  do |builder|
-                =# builder.file_field :image, :multiple => true
-                = render 'upload_image_fields', f: builder
-                %a{:class => 'image-class', :href => "javascript:void(0)", :onclick => "imageFieldFunction()"} Add More
+                = builder.file_field :image, :multiple => true
                 %br
               = f.submit "Upload", class: "btn.btn-primary"
 

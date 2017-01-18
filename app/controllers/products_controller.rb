@@ -5,27 +5,49 @@ class ProductsController < ApplicationController
 
 	def new
 		@product = Product.new
-		@product.upload_images.build
 	end
 
 	def create
 		@product = Product.new(product_params)
-		if @product.save
-			params[:product][:upload_images_attributes]["0"][:image].each do |image|
-				@product.upload_images.create(image: image)
+		category_ids = params[:product][:product_categories][:name].reject(&:blank?)
+		if category_ids.present?
+			if @product.save
+				category_ids = params[:product][:product_categories][:name].reject(&:blank?)
+				category_ids.each do |id|
+					ProductCategory.create(product_id: @product.id, category_id: id)
+				end
+				redirect_to products_path
+			else
+				render 'new'	
 			end
-			redirect_to products_path
 		else
-			@product.upload_images.build
+			flash[:message] = "please select category"
 			render 'new'
 		end
 	end
+
+	def edit
+		@product = Product.find(params[:id])
+	end
+
+	def update
+		@product = Product.find(params[:id])
+		if @product.update(product_params)
+			category_ids = params[:product][:product_categories][:name].reject(&:blank?)
+			category_ids.each do |id|
+				ProductCategory.create(product_id: @product.id, category_id: id)
+			end
+			redirect_to products_path
+		end
+	end
+
 	def temp_image_update
 		@temp_image = TemporaryImage.new(image: params[:media_file])
 	end
+
 	private
 
 	def product_params
-    params.require(:product).permit(:name, :upload_images_attributes => [:id, :image])
+    params.require(:product).permit(:name, :categories_attributes => [:id, :name])
   end
 end

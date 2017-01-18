@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require bootstrap.min
+//= require select2.min
 //= require_tree .

@@ -1,15 +1,18 @@
 #wrapper
+  / Navigation
   #page-wrapper
     .container-fluid
+      / Page Heading
       .row
         .col-lg-12
           %h1.page-header
-            Product Listing
-            %small Image Overview
+            Category Listing
+            %small  Category Overview
           %ol.breadcrumb
             %li.active
               %i.fa.fa-dashboard
               Index
+      / /.row
       .row
         .col-lg-12
           .alert.alert-info.alert-dismissable
@@ -17,7 +20,7 @@
             %i.fa.fa-info-circle
             %strong 
             Try out
-            %a.alert-link{:href => "/products/new"} Add Product
+            %a.alert-link{:href => "/categories/new"} Add Category
       .row
         .col-lg-12
           .table-responsive
@@ -25,18 +28,14 @@
               %thead
                 %tr
                   %th
-                    Product Name
-                  %th
-                    Categories Name
+                    Category Name
                   %th
                     Action
               %tbody
-                - @products.each do |product|
+                - @categories.each do |category|
                   %tr
                     %td
-                      = product.name
+                      = category.name
                     %td
-                      = product.categories.map(&:name).join(',')
-                    %td
-                      = link_to "Edit", edit_product_path(:id => product.id), class: "btn btn-primary"
-                      = link_to "Delete", product_path(:id => product.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger"
+                      = link_to "Edit", edit_category_path(:id => category.id), class: "btn btn-primary"
+                      = link_to "Delete", category_path(:id => category.id), method: :delete, data: {confirm: "Are you sure?"},  class: "btn btn-danger"

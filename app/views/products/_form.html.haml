@@ -1,11 +1,10 @@
 #wrapper
   #page-wrapper
     .container-fluid
-      / Page Heading
       .row
         .col-lg-12
           %h1.page-header
-            Upload New Images
+            Add Product
           %ol.breadcrumb
             %li
               %i.fa.fa-dashboard
@@ -13,16 +12,22 @@
             %li.active
               %i.fa.fa-edit
               Forms
-      / /.row
       .row
         .col-lg-6
           = form_for @product do |f|
             .form-group
               %label Name
-              = f.text_field :name, :class => "form-control"#, :multiple => true
-              %label Image
-              = f.fields_for :upload_images, :html => {:multipart => true}  do |builder|
-                = builder.file_field :image, :multiple => true, :required => true
-                %br
-              = f.submit "Upload", class: "btn.btn-primary"
+              = f.text_field :name, :class => "form-control"
+            .form-group
+              %label Category
+              = f.fields_for :product_categories, :html => {:multipart => true}  do |builder|
+                = builder.select(:name, Category.all.collect{|p| [p.name, p.id]}, { :prompt => "Please select"}, :class => "form-control multiple", :multiple =>"multiple")
+                = flash[:message] if flash[:message].present? 
+                = flash[:message] = nil
+            .form-group
+              = f.submit "Save", class: "btn btn-primary"
 
+:javascript
+  $(".multiple").select2();
+
+  

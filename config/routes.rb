@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :articles, :upload_images#, :products
+  resources :articles, :upload_images, :categories#, :products
   root 'products#new'
   resources :products do
   	collection do

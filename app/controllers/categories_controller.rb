@@ -28,12 +28,16 @@ class CategoriesController < ApplicationController
 	end
 
 	def destroy
-		if @category.check_products.present?
-		 	@category.destroy
+		 	if @category.destroy
+		# if @category.check_products.present?
+		# 	redirect_to categories_path
+		# else
+				# redirect_to categories_path
+			else
+				flash[:message] = 'Category have products, not deleted'
+			end
 			redirect_to categories_path
-		else
-			redirect_to categories_path
-		end
+		# end
 	end
 
 	private

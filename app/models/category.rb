@@ -5,8 +5,14 @@ class Category < ActiveRecord::Base
 
 	validates_uniqueness_of :name, message: "Category name already taken!"
 	validates_presence_of :name, message: "Please enter category name"
-	# before_destroy :check_products
+	before_destroy :check_products_present
 
+	def check_products_present
+		if !(self.products.present?)
+			errors.add(:name, 'error')
+			return false
+		end
+	end
 
 	def check_products
 		if self.products.present?

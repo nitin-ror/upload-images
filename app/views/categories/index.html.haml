@@ -8,19 +8,27 @@
           %h1.page-header
             Category Listing
             %small  Category Overview
-          %ol.breadcrumb
-            %li.active
-              %i.fa.fa-dashboard
-              Index
+          / %ol.breadcrumb
+          /   %li.active
+          /     %i.fa.fa-dashboard
+          /     Index
       / /.row
       .row
         .col-lg-12
           .alert.alert-info.alert-dismissable
-            %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+            / %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
             %i.fa.fa-info-circle
             %strong 
             Try out
             %a.alert-link{:href => "/categories/new"} Add Category
+      -  if flash[:notice].present?
+        .row
+          .col-lg-12
+            .alert.alert-success.alert-dismissable
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+              = flash[:notice] if flash[:notice].present?
+              = flash[:notice] = nil
+
       .row
         .col-lg-12
           = flash[:message] if flash[:message].present?

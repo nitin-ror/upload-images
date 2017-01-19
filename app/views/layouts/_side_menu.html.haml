@@ -1,10 +1,10 @@
 .collapse.navbar-collapse.navbar-ex1-collapse
   %ul.nav.navbar-nav.side-nav
-    %li.active
+    %li{:class => params[:controller] == "products" ? "active" : ''}
       %a{:href => "/products"}
         %i.fa.fa-fw.fa-dashboard
         Product
-    %li
+    %li{:class => params[:controller] == "categories" ? "active" : ''}
       %a{:href => "/categories"}
         %i.fa.fa-fw.fa-bar-chart-o
         Category

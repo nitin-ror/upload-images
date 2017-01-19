@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 	def create
 		@category = Category.new(category_params)
 		if @category.save
-			redirect_to categories_path
+			redirect_to categories_path, :notice => 'Category successfully saved!'
 		else
 			render 'new'
 		end
@@ -21,23 +21,18 @@ class CategoriesController < ApplicationController
 
 	def update
 		if @category.update(category_params)
-			redirect_to categories_path
+			redirect_to categories_path, :notice => 'Category successfully updated!'
 		else
 			render 'edit'
 		end
 	end
 
 	def destroy
-		 	if @category.destroy
-		# if @category.check_products.present?
-		# 	redirect_to categories_path
-		# else
-				# redirect_to categories_path
-			else
-				flash[:message] = 'Category have products, not deleted'
-			end
-			redirect_to categories_path
-		# end
+	 	if @category.destroy
+		else
+			flash[:message] = 'Category have products, not deleted'
+		end
+		redirect_to categories_path
 	end
 
 	private

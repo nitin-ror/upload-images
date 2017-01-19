@@ -15,11 +15,8 @@ class ProductsController < ApplicationController
 		category_ids = params[:product][:product_categories][:category_id].reject(&:blank?)
 		if category_ids.present?
 			if @product.save
-				category_ids = params[:product][:product_categories][:category_id].reject(&:blank?)
-				category_ids.each do |id|
-					ProductCategory.create(product_id: @product.id, category_id: id)
-				end	
-				redirect_to products_path
+				product_categories_create
+				redirect_to products_path, :notice => 'Product successfully saved!'
 			else
 				render 'new'	
 			end
@@ -34,10 +31,8 @@ class ProductsController < ApplicationController
 		if category_ids.present?
 			if @product.update(product_params)
 				ProductCategory.where(product_id: @product.id).destroy_all
-				category_ids.each do |id|
-					ProductCategory.create(product_id: @product.id, category_id: id)
-				end
-				redirect_to products_path
+				product_categories_create
+				redirect_to products_path, :notice => 'Product successfully updated!'
 			else
 				render "new", :locals => { :template => @product.id }	
 			end
@@ -57,6 +52,13 @@ class ProductsController < ApplicationController
 	end
 
 	private
+
+	def product_categories_create
+		category_ids = params[:product][:product_categories][:category_id].reject(&:blank?)
+		category_ids.each do |id|
+			ProductCategory.create(product_id: @product.id, category_id: id)
+		end	
+	end
 
 	def find_product
 		@product = Product.find(params[:id])

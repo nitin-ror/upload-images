@@ -13,11 +13,18 @@
       .row
         .col-lg-12
           .alert.alert-info.alert-dismissable
-            %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+            / %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
             %i.fa.fa-info-circle
             %strong 
             Try out
             %a.alert-link{:href => "/products/new"} Add Product
+      -  if flash[:notice].present?
+        .row
+          .col-lg-12
+            .alert.alert-success.alert-dismissable
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+              = flash[:notice] if flash[:notice].present?
+              = flash[:notice] = nil
       .row
         .col-lg-12
           .table-responsive
